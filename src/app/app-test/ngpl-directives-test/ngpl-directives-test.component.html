@@ -1,0 +1,65 @@
+<section>
+<span class="title">
+      Number Directive
+    </span>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-checkbox [formControl]="disableControl" class="mr-3">
+      Disable Control
+    </mat-checkbox>
+    <mat-checkbox [formControl]="readOnlyControl" class="mr-3">
+      ReadOnly Control
+    </mat-checkbox>
+  </div>
+  <form [formGroup]="formGroup" fxLayout="column">
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <mat-form-field>
+        <input matInput ngplOnlyNumber placeholder="Only Number" name="factor" formControlName="field1"/>
+        <mat-icon matSuffix class="mat-18" [ngplCopyWithMessage]="formGroup.get('field1').value"
+                  [messageTemplate]="field1copy"
+        >content_copy</mat-icon>
+      </mat-form-field>
+      <ng-template #field1copy>
+        <ngpl-copy-success>
+          Valor {{formGroup.get('field1').value}} copiado satisfactoriamente
+        </ngpl-copy-success>
+      </ng-template>
+
+      <mat-form-field>
+        <input matInput [ngplDecimalNumber]="6" placeholder="Decimal Number" name="factor" formControlName="field2"/>
+        <mat-icon matSuffix class="mat-18" [ngplCopyWithMessage]="formGroup.get('field1').value"
+                  [messageTemplate]="field2copy"
+        >content_copy</mat-icon>
+
+      </mat-form-field>
+      <ng-template #field2copy>
+        <ngpl-copy-success>
+          <mat-icon class="mat-18 mr-3">task_alt</mat-icon>  Valor {{formGroup.get('field2').value}} copiado satisfactoriamente
+        </ngpl-copy-success>
+      </ng-template>
+
+
+      <mat-form-field>
+        <input matInput ngplNumberFormat placeholder="Number Format" name="factor" formControlName="field3"/>
+        <mat-icon matSuffix class="mat-18"
+                  [ngplCopyWithMessage]="formGroup.get('field1').value"
+                  [messageTemplate]="field3copy"
+          >content_copy</mat-icon>
+      </mat-form-field>
+      <ng-template #field3copy>
+        <ngpl-copy-success>
+          Valor {{formGroup.get('field3').value}} copiado satisfactoriamente
+        </ngpl-copy-success>
+      </ng-template>
+
+
+    </div>
+
+  </form>
+
+  <div fxLayout="" fxLayoutAlign="space-between">
+    <pre>{{formGroup.value | json}}</pre>
+    <pre>{{formGroup.getRawValue() | json}}</pre>
+  </div>
+
+</section>

@@ -1,0 +1,8 @@
+{
+  "name": "ngpl-rx-cookie-store",
+  "version": "1.0.1",
+  "peerDependencies": {},
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}
