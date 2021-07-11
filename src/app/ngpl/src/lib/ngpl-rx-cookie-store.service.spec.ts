@@ -53,4 +53,29 @@ describe('NgplRxCookieStoreService', () => {
     service.setValue(key, value, 'domain.com');
     expect(service.getValue(key)).toEqual(value);
   });
+
+  it('should emit null when delete cookie', done => {
+    service.valueChanges(key)
+      .pipe(
+        tap((val: any) => {
+          expect(val).toBeFalsy();
+          done();
+        })
+      )
+      .subscribe();
+    service.delete(key);
+  });
+
+  it('should emit null when delete cookie with domain', done => {
+    service.valueChanges(key)
+      .pipe(
+        tap((val: any) => {
+          expect(val).toBeFalsy();
+          done();
+        })
+      )
+      .subscribe();
+    service.delete(key, 'domain.com');
+  });
+
 });

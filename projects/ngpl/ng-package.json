@@ -5,5 +5,8 @@
   ],
   "lib": {
     "entryFile": "../../src/app/ngpl/src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "ngx-cookie-service"
+  ]
 }

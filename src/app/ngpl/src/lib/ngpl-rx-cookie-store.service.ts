@@ -45,4 +45,9 @@ export class NgplRxCookieStoreService {
     this.cookieService.set(key, JSON.stringify(value), null, null, domain || this.domain);
     this.value.next({key, value});
   }
+
+  delete(key: string, domain = this.domain): void {
+    this.cookieService.delete(key, domain);
+    this.value.next({key, value: null});
+  }
 }
