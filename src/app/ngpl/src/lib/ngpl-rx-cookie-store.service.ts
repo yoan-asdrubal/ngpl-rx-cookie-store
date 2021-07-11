@@ -36,18 +36,31 @@ export class NgplRxCookieStoreService {
     this.domain = domain;
   }
 
-  getValue(key: string, defaultValue = null): any {
+  get(key: string, defaultValue = null): any {
     const p = this.cookieService.get(key);
     return !!p ? JSON.parse(p) : defaultValue;
   }
 
-  setValue(key: string, value: any, domain = null): void {
-    this.cookieService.set(key, JSON.stringify(value), null, null, domain || this.domain);
+  set(key: string, value: any, options = null): void {
+    this.cookieService.set(key, JSON.stringify(value), options);
     this.value.next({key, value});
   }
 
   delete(key: string, domain = this.domain): void {
     this.cookieService.delete(key, domain);
     this.value.next({key, value: null});
+  }
+
+  getAll(): any {
+    return this.cookieService.getAll();
+  }
+
+  deleteAll(): void {
+    const all = this.getAll();
+    Object.keys(all)
+      .forEach(key => {
+        this.delete(key);
+        this.value.next({key, value: null});
+      });
   }
 }

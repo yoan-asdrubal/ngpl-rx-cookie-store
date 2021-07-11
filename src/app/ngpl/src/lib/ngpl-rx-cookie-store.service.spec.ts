@@ -17,12 +17,12 @@ describe('NgplRxCookieStoreService', () => {
   });
 
   it('should return null', () => {
-    expect(service.getValue(key)).toEqual(null);
+    expect(service.get(key)).toEqual(null);
   });
 
   it('should return current value', () => {
-    service.setValue(key, value);
-    expect(service.getValue(key)).toEqual(value);
+    service.set(key, value);
+    expect(service.get(key)).toEqual(value);
   });
 
   it('should emit value changes', done => {
@@ -33,8 +33,8 @@ describe('NgplRxCookieStoreService', () => {
         })
       )
       .subscribe();
-    service.setValue(key, value);
-    expect(service.getValue(key)).toEqual(value);
+    service.set(key, value);
+    expect(service.get(key)).toEqual(value);
 
     service.valueChanges(key + '1')
       .pipe(
@@ -44,14 +44,14 @@ describe('NgplRxCookieStoreService', () => {
         })
       )
       .subscribe();
-    service.setValue(key + '1', value);
+    service.set(key + '1', value);
 
   });
 
 
   it('should set value by domain', () => {
-    service.setValue(key, value, 'domain.com');
-    expect(service.getValue(key)).toEqual(value);
+    service.set(key, value, {domain: 'domain.com'});
+    expect(service.get(key)).toEqual(value);
   });
 
   it('should emit null when delete cookie', done => {
@@ -78,4 +78,29 @@ describe('NgplRxCookieStoreService', () => {
     service.delete(key, 'domain.com');
   });
 
+
+  it('should return all values', () => {
+    service.set('key1', 1);
+    service.set('key2', 2);
+    service.set('key3', 3);
+    expect(service.getAll()).toEqual({key1: 1, key2: 2, key3: 3});
+  });
+
+  it('should emit null value when delete  all', done => {
+    service.set('key1', 1);
+    service.set('key2', 2);
+    service.set('key3', 3);
+    expect(service.get('key1')).toEqual(1);
+
+    service.valueChanges('key1')
+      .pipe(
+        tap((val: any) => {
+          expect(val).toBeNull();
+          done();
+        })
+      )
+      .subscribe();
+    service.deleteAll();
+
+  });
 });
