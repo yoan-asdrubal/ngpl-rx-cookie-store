@@ -1,15 +1,17 @@
 {
   "name": "ngpl-rx-cookie-store",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "peerDependencies": {},
   "dependencies": {
     "tslib": "^2.0.0",
-    "rxjs": "~6.6.0",
-    "ngx-cookie-service": "^12.0.0"
+    "rxjs": "~6.5.5",
+    "typescript": "~4.0.2",
+    "ngx-cookie-service": "^10.0.0"
   },
   "keywords": [
-    "localStore",
-    "rxjs"
+    "cookieStore",
+    "rxjs",
+    "angular"
   ],
   "repository": {
     "type": "git",
